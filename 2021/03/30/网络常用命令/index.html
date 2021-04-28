@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>网络常用命令 | czm9084</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、Ping命令 ping是个使用频率极高的实用程序，主要用于确定网络的连通性。  这对确定网络是否正确连接，以及网络连接的状况十分有用。简单的说，ping就是一个测试程序，如果ping运行正确，大体上就可以排除网络访问层、网卡、Modem的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。  ping能够以毫秒为单位显示发送请求到返回应答之间的时间量。如果应答时间短，表示数据报不必通过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络常用命令">
+<meta property="og:url" content="http://example.com/2021/03/30/%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="czm9084">
+<meta property="og:description" content="一、Ping命令 ping是个使用频率极高的实用程序，主要用于确定网络的连通性。  这对确定网络是否正确连接，以及网络连接的状况十分有用。简单的说，ping就是一个测试程序，如果ping运行正确，大体上就可以排除网络访问层、网卡、Modem的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。  ping能够以毫秒为单位显示发送请求到返回应答之间的时间量。如果应答时间短，表示数据报不必通过">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-30T09:46:47.000Z">
+<meta property="article:modified_time" content="2021-04-19T04:43:38.992Z">
+<meta property="article:author" content="czm9084">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="czm9084" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">czm9084</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-网络常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2021-03-30T09:46:47.000Z" itemprop="datePublished">2021-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      网络常用命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="一、Ping命令"><a href="#一、Ping命令" class="headerlink" title="一、Ping命令"></a>一、Ping命令</h3><ul>
+<li><p>ping是个使用频率极高的实用程序，主要用于确定网络的连通性。</p>
+</li>
+<li><p>这对确定网络是否正确连接，以及网络连接的状况十分有用。简单的说，ping就是一个测试程序，如果ping运行正确，大体上就可以排除网络访问层、网卡、Modem的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。</p>
+</li>
+<li><p>ping能够以毫秒为单位显示发送请求到返回应答之间的时间量。如果应答时间短，表示数据报不必通过太多的路由器或网络，连接速度比较快。</p>
+</li>
+</ul>
+<ol>
+<li>命令格式<ul>
+<li>ping 主机名； ping 域名； ping IP地址。这个三个格式都是可以的。</li>
+</ul>
+</li>
+<li>ping命令的基本应用<ul>
+<li>ping 127.0.0.1，如果测试成功，表明网卡、TCP/IP协议的安装、IP地址、子网掩码的设置正常。如果测试不成功，就表示TCP/IP的安装或设置存在有问题。</li>
+<li>ping 本机IP地址，如果测试不成功，则表示本地配置或安装存在问题，应当对网络设备和通讯介质进行测试、检查并排除。</li>
+<li>ping局域网内其他IP，如果测试成功，表明本地网络中的网卡和载体运行正确。但如果收到0个回送应答，那么表示子网掩码不正确或网卡配置错误或电缆系统有问题。</li>
+<li>ping 网关IP，这个命令如果应答正确，表示局域网中的网关路由器正在运行并能够做出应答。</li>
+<li>ping 远程IP，如果收到正确应答，表示成功的使用了缺省网关。对于拨号上网用户则表示能够成功的访问Internet。</li>
+</ul>
+</li>
+<li>ping命令的常用参数选项<ul>
+<li>ping IP -t：连续对IP地址执行ping命令，直到被用户以Ctrl+C中断。</li>
+<li>ping IP -l 2000：指定ping命令中的特定数据长度（此处为2000字节），而不是缺省的32字节。</li>
+<li>ping IP -n 20：执行特定次数（此处是20）的ping命令。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、Tracert命令"><a href="#二、Tracert命令" class="headerlink" title="二、Tracert命令"></a>二、Tracert命令</h3><ul>
+<li>Tracert命令用来显示数据包到达目标主机所经过的路径，并显示到达每个节点的时间。命令功能同Ping类似，但它所获得的信息要比Ping命令详细得多，它把数据包所走的全部路径、节点的IP以及花费的时间都显示出来。该命令比较适用于大型网络。</li>
+</ul>
+<ol>
+<li>命令格式：<ul>
+<li>tracert IP地址或主机名 [-d][-h maximumhops][-j host_list] [-w timeout]</li>
+</ul>
+</li>
+<li>参数含义：<ul>
+<li>-d 不解析目标主机的名字</li>
+<li>-h maximum_hops 指定搜索到目标地址的最大跳跃数；</li>
+<li>-j host_list 按照主机列表中的地址释放源路由；</li>
+<li>-w timeout 指定超时时间间隔，程序默认的时间单位是毫秒</li>
+<li>例如想要了解自己的计算机与目标主机之间详细的传输路径信息，可以在MS-DOS方式输入tracert +目标主机域名或者IP地址。</li>
+</ul>
+</li>
+</ol>
+<h3 id="三、Netstat命令"><a href="#三、Netstat命令" class="headerlink" title="三、Netstat命令"></a>三、Netstat命令</h3><ul>
+<li>它可以显示当前正在活动的网络连接的详细信息，例如显示网络连接、路由表和网络接口信息，可以统计目前总共有哪些网络连接正在运行。</li>
+<li>利用命令参数，命令可以显示所有协议的使用状态，这些协议包括TCP协议、UDP协议以及IP协议等。</li>
+<li>可以选择特定的协议并查看其具体信息，还能显示所有主机的端口号以及当前主机的详细路由信息。</li>
+</ul>
+<ol>
+<li>命令格式：<ul>
+<li>netstat [-r] [-s] [-n] [-a]</li>
+</ul>
+</li>
+<li>参数含义：<ul>
+<li>-r 显示本机路由表的内容；</li>
+<li>-s 显示每个协议的使用状态(包括TCP协议、UDP协议、IP协议)；</li>
+<li>-n 以数字表格形式显示地址和端口；</li>
+<li>-a 显示所有主机的端口号。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/30/%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cko1enl390007a8ukdmbr351a" data-title="网络常用命令" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          网络整体策略优化及保障设备介绍
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/30/%E7%AB%AF%E5%8F%A3%E6%BC%8F%E6%B4%9E/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">端口漏洞</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/09/JavaWeb/">JavaWeb</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/">HVV蓝方四个阶段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/Spring5/">Spring5</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/SpringBoot/">SpringBoot</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/">网络整体策略优化及保障设备介绍</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 czm9084<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

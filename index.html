@@ -71,6 +71,467 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-JavaWeb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/09/JavaWeb/" class="article-date">
+  <time class="dt-published" datetime="2021-04-09T09:33:04.000Z" itemprop="datePublished">2021-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/09/JavaWeb/">JavaWeb</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-servlet"><a href="#1-servlet" class="headerlink" title="1.servlet"></a>1.servlet</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1.定义"></a>1.1.定义</h3><p>　　Servlet是Server与Applet的缩写，是服务端小程序的意思。使用Java语言编写的服务器端程序，可以像生成动态的WEB页,Servlet主要运行在服务器端，并由服务器调用执行，是一种按照Servlet标准来开发的类。是SUN公司提供的一门用于开发动态Web资源的技术。(言外之意:要实现web开发，需要实现Servlet标准)<br>　　Servlet本质上也是Java类，但要遵循Servlet规范进行编写，没有 main()方法，它的创建、使用、销毁都由Servlet容器进行管理(如Tomcat)。(言外之意:写自己的类，不用写main方法，别人自动调用)<br>　　Servlet是和HTTP协议是紧密联系的，其可以处理HTTP协议相关的所有内容。这也是Servlet应用广泛的原因之一。<br>　　提供了Servlet功能的服务器，叫做Servlet容器，其常见容器有很多，如Tomcat, Jetty, WebLogic Server,WebSphere,JBoss 等等。</p>
+<h3 id="1-2-实现"><a href="#1-2-实现" class="headerlink" title="1.2.实现"></a>1.2.实现</h3><ol>
+<li>实现Servlet规范，继承HttpServlet类</li>
+<li>重写service方法，用来处理请求</li>
+<li>添加@WebServlet注解，指定访问的路径</li>
+</ol>
+<h3 id="1-3-原理"><a href="#1-3-原理" class="headerlink" title="1.3.原理"></a>1.3.原理</h3><ol>
+<li><p>根据web请求头中的host找到服务器</p>
+</li>
+<li><p>根据请求行（post、get）获取访问的资源路径，找到对应的servlet类</p>
+</li>
+<li><p>类加载与其初始化：</p>
+<p>　　servlet容器将servlet加载到内存，（第一次访问）容器创建servlet实例（非首次直接调用），通过init方法进行初始化</p>
+</li>
+<li><p>服务阶段：</p>
+<p>　　调用Service()方法，Service()方法根据请求方法调用对应的处理方法doPost()或doGet()，还有一些其他的请求方法doPut() doOptions()…但这些方法不常用，并且从安全的角度都是建议屏蔽的。</p>
+</li>
+<li><p>销毁：</p>
+<p>　　处理完请求调用Destroy()方法销毁servlet</p>
+</li>
+<li><p>每一个不同的请求对应一个不同的servlet</p>
+</li>
+</ol>
+<h3 id="1-4-生命周期"><a href="#1-4-生命周期" class="headerlink" title="1.4.生命周期"></a>1.4.生命周期</h3><ol>
+<li>Web客户端向Servlet容器(Tomcat)发出Http请求</li>
+<li>Servlet容器接收Web客户端的请求</li>
+<li>Servlet容器创建一个HttpServletRequest对象，将Web客户端请求的信息封装到这个对象中</li>
+<li>Servlet容器创建一个HttpServletResponse对象</li>
+<li>Servlet容器调HttpServlet对象service方法，把Request与Response作为参数，传给HttpServlet</li>
+<li>HttpServlet调用HttpServletRequest对象的有关方法，获取Http请求信息</li>
+<li>HttpServlet 调用HttpServletResponse对象的有关方法，生成响应数据</li>
+<li>Servlet容器把HttpServlet的响应结果传给Web客户端</li>
+</ol>
+<h2 id="2-HttpServletRequest对象"><a href="#2-HttpServletRequest对象" class="headerlink" title="2.HttpServletRequest对象"></a>2.HttpServletRequest对象</h2><h3 id="2-1-接受请求"><a href="#2-1-接受请求" class="headerlink" title="2.1.接受请求"></a>2.1.接受请求</h3><h4 id="2-1-1-常用方法"><a href="#2-1-1-常用方法" class="headerlink" title="2.1.1.常用方法"></a>2.1.1.常用方法</h4><ol>
+<li>获取请求的完整路径：req.getRequestURL()</li>
+<li>获取资源定位符：req.getRequestURI()</li>
+<li>获取请求参数：req.getQueryString()</li>
+<li>获取请求方法：req.getMethod()</li>
+<li>获取当前协议版本信息：req.getProtocol()</li>
+<li>获取项目站点：req.getContextPath()</li>
+</ol>
+<h4 id="2-1-2-获取请求参数"><a href="#2-1-2-获取请求参数" class="headerlink" title="2.1.2.获取请求参数"></a>2.1.2.获取请求参数</h4><ol>
+<li>指定名称获取参数：req.getParameter()</li>
+<li>指定名称获取多个参数（用于复选框）：req.getParameterValues()</li>
+</ol>
+<h3 id="2-2-请求乱码问题"><a href="#2-2-请求乱码问题" class="headerlink" title="2.2.请求乱码问题"></a>2.2.请求乱码问题</h3><ol>
+<li><p>tomcat：</p>
+<ul>
+<li><p>1、tomcat8（及以上）：Get()方法不会乱码；Post()方法会乱码</p>
+</li>
+<li><p>2、tomcat7（及以下）：Get()方法会乱码；Post()方法会乱码</p>
+</li>
+</ul>
+</li>
+<li><p>原因：Post方法在解析过程中默认编码方式为 ISO-8859-1(此编码不支持中文)，所以一定会乱码</p>
+</li>
+<li><p>解决方法：req.setCharacterEncoding(“UTF-8”);</p>
+</li>
+<li><p>注意：</p>
+<ul>
+<li><p>1、req.setCharacterEncoding(“UTF-8”)只针对post请求</p>
+</li>
+<li><p>2、new String(req.getParameter(“name”).getBytes(“ISO-8859-1”), “UTF-8”)针对任何情况。不乱码使用会乱码</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-3-请求转发"><a href="#2-3-请求转发" class="headerlink" title="2.3.请求转发"></a>2.3.请求转发</h3><ol>
+<li>定义：在Web应用内部，一个servlet只能请求转发到一个资源。</li>
+<li>特点：<ul>
+<li>1.服务器端行为</li>
+<li>2.地址栏不发生改变</li>
+<li>3.从始至终只有一个请求</li>
+<li>4.request数据可以共享</li>
+</ul>
+</li>
+<li>实现：<ul>
+<li>req.getRequestDispatcher(“ /servlet or xxx.jsp/html “).forward(req, resp);</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-4-Request作用域"><a href="#2-4-Request作用域" class="headerlink" title="2.4.Request作用域"></a>2.4.Request作用域</h3><ol>
+<li>定义：通过该对象可以在一个请求中共享数据（能在请求转发中传输/共享数据）</li>
+<li>作用范围：只在一次请求中有效（只能在请求转发中有效）</li>
+<li>实现：<ul>
+<li>1.设置域对象内容：req.setAttribute(key, value);</li>
+<li>2.设置请求转发（转发到index.jsp为例）：req.getRequestDispatcher(“index.jsp”).forward(req, resp);</li>
+<li>3.根据key获取value（在index.jsp页面）：req.getAttribute(key);</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-HttpServletResponse对象"><a href="#3-HttpServletResponse对象" class="headerlink" title="3.HttpServletResponse对象"></a>3.HttpServletResponse对象</h2><h3 id="3-1-响应数据"><a href="#3-1-响应数据" class="headerlink" title="3.1.响应数据"></a>3.1.响应数据</h3><ol>
+<li>常用方法：<ul>
+<li>1.getWriter()：字符输出流，只输出字符串</li>
+<li>2.getOutputStream()：字节输出流，输出任意类型数据</li>
+</ul>
+</li>
+<li>注意：只有一个response对象，两者不能同时使用，否则报错：java.lang.IllegalStateException</li>
+<li>实现：<ul>
+<li>1.获取字节/字符输出流：getWriter()/getOutputStream()</li>
+<li>2.输出数据：getWriter().write()/getOutputStream().write()</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-2-响应乱码问题"><a href="#3-2-响应乱码问题" class="headerlink" title="3.2.响应乱码问题"></a>3.2.响应乱码问题</h3><ul>
+<li>字节输出流/字符输出流：<ul>
+<li>1.分别设置服务端、客户端编码<ul>
+<li>1.服务端：resp.setCharacterEncoding(“UTF-8”);</li>
+<li>2.客户端：resp.setHeader(“content-type”, “text/html;charset=UTF-8”);</li>
+</ul>
+</li>
+<li>2.统一设置服务端客户端编码：resp.setContentType(“text/html;charset=UTF-8”);</li>
+<li>3.输出数据：resp.getWriter().write();</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/image-20210409175336119.png" alt="image-20210409175336119"></p>
+<ul>
+<li>当服务器接收到浏览器的请求后，会解析请求URL路径，获取访问的serverlet的资源路径</li>
+<li>查找web.xml文件，是否有对应的<code>&lt;url-pattern&gt;</code>标签体内容</li>
+<li>如果有，则再找到对应的<code>&lt;serverlet-class&gt;</code>全类名</li>
+<li>tomcat将该类的字节码文件加载进内存，并创建其对象</li>
+<li>调用其方法</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/09/JavaWeb/" data-id="cko1enl330001a8ukfgb72wzc" data-title="JavaWeb" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-HVV蓝方四个阶段" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/" class="article-date">
+  <time class="dt-published" datetime="2021-04-06T03:12:15.000Z" itemprop="datePublished">2021-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/">HVV蓝方四个阶段</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="01-备战阶段"><a href="#01-备战阶段" class="headerlink" title="01 备战阶段"></a>01 备战阶段</h2><h3 id="全面发现"><a href="#全面发现" class="headerlink" title="全面发现"></a>全面发现</h3><ol>
+<li><p><strong>重点关注</strong></p>
+<ul>
+<li><p>物理威胁</p>
+<p>包括连接内网的WIFI、门禁、安保巡逻、监控设备等。</p>
+</li>
+<li><p>数据</p>
+<p>代码泄露、文档信息泄露、邮箱信息泄露、历史漏洞泄露。</p>
+</li>
+<li><p>系统</p>
+<p>包括域名、IP地址、C段、开放端口【高位风险端口（22、445、3389、1521、7001）】、运行服务、web中间件、web应用、移动应用、网络架构、网络策略、业务逻辑关系梳理等。</p>
+</li>
+<li><p>供应商信息</p>
+<p>包括相关合同、系统版本、软件、硬件、代码、服务、人员等。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>内网资产梳理</strong></p>
+<ul>
+<li><p>未知资产发现</p>
+<p>通过对内网网段的探测，发现存活的资产和现状梳理的资产进行比对，发现未知资产；</p>
+<p>可以通过流量审计发现未知资产通讯的相关业务，顺藤摸瓜；</p>
+</li>
+<li><p>内网资产梳理</p>
+<p>识别内网系统的操作类型、中间件、数据库、内网设备、开发组件、端口服务等，进行资产盘点和有效的分类。</p>
+</li>
+<li><p>目标系统梳理</p>
+<p>目标系统关键链路是否定级、安全检查、渗透测试，同区域、同网段部署的业务系统等，针对目标系统相关资产（网络设备、安全设备、主机系统），分析梳理可能的攻击路径。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>互联网暴露面梳理</strong></p>
+<ol>
+<li><p>存货资产发现</p>
+<p>对服务单位的互联网地址段进行存活IP的挖掘</p>
+</li>
+<li><p>开放端口检查</p>
+<p>存活IP地址所开放的端口发现</p>
+</li>
+<li><p>开放服务类</p>
+<p>开放端口所部署的服务内容进行分类</p>
+</li>
+<li><p>APP查找</p>
+<p>服务单位APP相关信息查找</p>
+</li>
+<li><p>公众号和小程序查找</p>
+<p>服务单位公众号和小程序相关信息查找</p>
+</li>
+<li><p>网盘信息搜索</p>
+<p>网盘留存文件信息查找</p>
+</li>
+<li><p>暗网信息搜素</p>
+<p>通过暗网查询是否存在数据泄露情况</p>
+</li>
+<li><p>工具</p>
+<ul>
+<li>网络空间扫描工具<ol>
+<li>多维度统计资产，记录详细的端口、服务、设备类型、厂商、管理员等特征。</li>
+<li>精准识别网络协议、网络常用端口匹配、全面的资产指纹库</li>
+</ol>
+</li>
+<li>敏感信息爬虫工具<ol>
+<li>通过网站的前端页脚、源码及js代码文件、后台等信息，爬取网站敏感信息</li>
+<li>在爬虫过程中，对系统零影响</li>
+</ol>
+</li>
+<li>外网资产实时监控工具<ol>
+<li>通过网络协议判断端口开放、IP存活的实时情况</li>
+<li>和已知的开放端口和存活IP进行比对，判断出端口开放、IP存活的实时情况</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="全面评估"><a href="#全面评估" class="headerlink" title="全面评估"></a>全面评估</h3><ol>
+<li><p>路径评估</p>
+<ul>
+<li>梳理出在互联网上暴露的不必要的服务、端口信息。</li>
+<li>针对高危漏洞系统识别，无法修复的系统进行策略加固或下线处理</li>
+<li>针对无人认领资产的有效识别，通过流量监控对应到系统、区域</li>
+</ul>
+</li>
+<li><p>对抗性安全运营体系评估</p>
+<ul>
+<li>对防火墙的策略进行梳理，识别高危端口开放、策略范围过大等策略</li>
+<li>安全防护策略有效性识别，安全策略是否及时更新</li>
+<li>整体安全监控、防御体系的评估</li>
+</ul>
+</li>
+<li><p>基础安全评估</p>
+<ul>
+<li>漏洞扫描</li>
+<li>基线核查</li>
+<li>渗透测试</li>
+<li>弱口令检测</li>
+</ul>
+</li>
+<li><p>重点账号安全审计</p>
+<p>针对重点系统：堡垒机、4A、域控、VPN等</p>
+<ul>
+<li>弱口令和口令策略审计</li>
+<li>账号权限审计</li>
+<li>相关日志审计</li>
+</ul>
+</li>
+<li><p>敏感信息检测</p>
+<ul>
+<li>终端、服务器设备是否存放网络资产、网络拓补等信息</li>
+<li>终端、服务器设备是否存放密码表信息</li>
+<li>开发文件、源码信息备份文件的管理</li>
+</ul>
+</li>
+<li><p>专项评估</p>
+<ul>
+<li>重点系统、区域的集成渗透测试（域、4A、堡垒机、VPN）</li>
+<li>入侵痕迹排查（webshell检测）</li>
+<li>密码口令评估检测</li>
+</ul>
+</li>
+</ol>
+<h3 id="全面加固"><a href="#全面加固" class="headerlink" title="全面加固"></a>全面加固</h3><ol>
+<li><strong>网络纵深防御</strong><ul>
+<li>1、划分边界清晰的域，明确安全域定位、管理边界，落实责任，并可进一步划分安全子域，确保重要防护资源重点保护</li>
+<li>2、梳理并完善网络安全策略，按最小化原则配给网络权限</li>
+<li>3、在各级网络边界部署有效的安全防护设备和防护措施，切实加强安全防护、安全检测与应急处置的技术手段，确保南北向流量可控</li>
+<li>4、对策略进行集中管理，在不同区域边界和区域内部，部署安全防护设备，并采集防护日志建立安全分析模型，确保东西向流量可控可审计</li>
+</ul>
+</li>
+<li><strong>攻击面防护</strong><ul>
+<li>1、加强互联网暴露面管理和防护</li>
+<li>2、加强互联网出入口管理和防护</li>
+<li>3、加强资产管理</li>
+<li>4、加强主机/网络设备/安全设备/应用系统防护</li>
+<li>5、加强业务安全防护</li>
+<li>6、加强移动应用APP防护</li>
+<li>7、加强办公终端管理</li>
+<li>8、加强账号和口令管理</li>
+<li>9、加强客户合作伙伴管理</li>
+</ul>
+</li>
+<li><strong>部署主动防御</strong><ul>
+<li>1、需利用网络安全监测预警分析态势感知平台，精准发现网络安全事件，定位攻击源，溯源事件过程和攻击路径，实现对安全事件的快速预警报告</li>
+<li>2、实现网络安全整体态势追踪，事件发现、处理流程闭环管理</li>
+<li>3、加大部署全息蜜罐等追捕系统。特别是在重要生产网络、核心网络和业务服务器等重点区域进行部署，实现延缓攻击进程、攻击行为捕获和溯源分析。</li>
+<li>4、制定常见攻击场景的应急响应方案，及时响应和处置告警信息或攻击通报</li>
+<li>5、为客户资产的网络管理、维护人员提供常见安全风险的故障处理方法，或配备相应故障处理手册，确保在安全事件发生时，能第一时间加以处理或抑制其发展态势</li>
+<li>6、重点关注网络区域非法进入类事件、恶意代码植入事件以及主机控制类等事件</li>
+</ul>
+</li>
+<li><strong>重点系统专项防护</strong><ol>
+<li> 域控系统</li>
+</ol>
+<ul>
+<li>加强特权管理，清理特权账号</li>
+<li>确保域机器准线、安全补丁、病毒查杀到位</li>
+<li>确保域内日志留存</li>
+<li>实时监控账号行为</li>
+</ul>
+<ol start="2">
+<li>邮箱系统<ul>
+<li>确保动态双因子认证有效</li>
+<li>对帐号进行最小化认证授权，排查无用账号</li>
+<li>排查存在涉密邮件</li>
+<li>动态监测、谨防钓鱼</li>
+</ul>
+</li>
+<li>VPN/4A系统<ul>
+<li>确保动态双因子认证有效</li>
+<li>加强VPN/4A系统自身的异常检测和审计</li>
+<li>全面检查和清理沉默账号</li>
+</ul>
+</li>
+<li>门户类、集权类网站<ul>
+<li>梳理账号权限实现账号最小化原则</li>
+<li>清理无人使用账号、测试账号、离职员工账号</li>
+<li>账号登录须至少采用动态双因子认证</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="组织-流程"><a href="#组织-流程" class="headerlink" title="组织/流程"></a>组织/流程</h3><h2 id="02-临战阶段"><a href="#02-临战阶段" class="headerlink" title="02  临战阶段"></a>02  临战阶段</h2><h3 id="攻防演练"><a href="#攻防演练" class="headerlink" title="攻防演练"></a>攻防演练</h3><h3 id="全员教育"><a href="#全员教育" class="headerlink" title="全员教育"></a>全员教育</h3><h2 id="03-值守阶段"><a href="#03-值守阶段" class="headerlink" title="03 值守阶段"></a>03 值守阶段</h2><h3 id="全面监控"><a href="#全面监控" class="headerlink" title="全面监控"></a>全面监控</h3><h3 id="综合研判"><a href="#综合研判" class="headerlink" title="综合研判"></a>综合研判</h3><h3 id="应急溯源"><a href="#应急溯源" class="headerlink" title="应急溯源"></a>应急溯源</h3><h3 id="数据上报"><a href="#数据上报" class="headerlink" title="数据上报"></a>数据上报</h3><h2 id="04-总结阶段"><a href="#04-总结阶段" class="headerlink" title="04 总结阶段"></a>04 总结阶段</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/" data-id="cko1enl2z0000a8ukdjbbf4eh" data-title="HVV蓝方四个阶段" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Spring5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/06/Spring5/" class="article-date">
+  <time class="dt-published" datetime="2021-04-06T03:12:15.000Z" itemprop="datePublished">2021-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/06/Spring5/">Spring5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="bean-xml配置文件"><a href="#bean-xml配置文件" class="headerlink" title="bean.xml配置文件"></a>bean.xml配置文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/06/Spring5/" data-id="cko1enl340002a8uk4pvk6hs2" data-title="Spring5" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-SpringBoot" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/06/SpringBoot/" class="article-date">
+  <time class="dt-published" datetime="2021-04-06T03:12:15.000Z" itemprop="datePublished">2021-04-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/06/SpringBoot/">SpringBoot</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/06/SpringBoot/" data-id="cko1enl370004a8ukcprjgsqe" data-title="SpringBoot" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-网络整体策略优化及保障设备介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/" class="article-date">
@@ -94,7 +555,7 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="一、安全防护设备概述"><a href="#一、安全防护设备概述" class="headerlink" title="一、安全防护设备概述"></a>一、安全防护设备概述</h2><p>&emsp;&emsp;网络安全设备常见的有防火墙、WEB防火墙（WAF）、入侵防御（IPS）、入侵检测（IDS）、防毒墙等，广义的信息安全设备除了包括上述设备外，还包括密码芯片、加密卡、身份识别卡、电话密码机、传真密码机、异步数据密码机、安全服务器、安全加密套件、金融加密机/卡、安全中间件、公开密钥基础设施（PKI）系统、授权证书（CA）系统、安全操作系统、防病毒软件等。</p>
-<br>
+<br/>
 
 <p><strong>安全设备在hw中需要注意以下几个方面：</strong></p>
 <p>1、安全监控与日志分析：</p>
@@ -103,7 +564,7 @@
 <p>&emsp;&emsp;部署设备后，需要配置严格合理的策略才能使其发挥最大作用，要掌握安全设备的策略的分析、优化。</p>
 <p>3、安全设备自身加固：</p>
 <p>&emsp;&emsp;安全设备是保障网络安全的重要手段，其自身安全要得到足够重视，一旦边界安全设备被入侵，意味着完全失守。</p>
-<br>
+<br/>
 
 <h2 id="二、安全设备功能介绍及部署方式"><a href="#二、安全设备功能介绍及部署方式" class="headerlink" title="二、安全设备功能介绍及部署方式"></a>二、安全设备功能介绍及部署方式</h2><p><strong>防火墙等安全设备常见的部署模式：</strong></p>
 <p>1、路由模式：</p>
@@ -113,11 +574,11 @@
 <p>3、旁路模式：</p>
 <p>&emsp;&emsp;设备连接在内网交换机的镜像口，镜像内网用户的上网数据，通过镜像的数据实现对内网上网数据的监控和控制，可以完全不需改变用户的网络环境，并且可以避免设备对用户网络造成中断的风险，但这种模式下设备的控制能力较差，部分功能实现不了。</p>
 <p>4、代理模式等等。。。</p>
-<br>
+<br/>
 
 <h2 id="三、网络架构评估优化"><a href="#三、网络架构评估优化" class="headerlink" title="三、网络架构评估优化"></a>三、网络架构评估优化</h2><p><img src="/images/%E4%B8%80%E4%B8%AD%E5%BF%83%E4%B8%89%E9%98%B2%E6%8A%A4.png"></p>
-<p><br><!-- nbsp; --></p>
-<p><strong><center>基于“一中心三防护”安全措施构建（实例）<center></center></center></strong></p>
+<p><br/><!-- nbsp; --></p>
+<p><strong><center>基于“一中心三防护”安全措施构建（实例）<center/></strong></p>
 <table>
 <thead>
 <tr>
@@ -152,15 +613,182 @@
 <td>日志审计</td>
 </tr>
 </tbody></table>
-<br>
+<br/>
 
-<p><strong><center>安全部署<center></center></center></strong></p>
+<p><strong><center>安全部署<center/></strong></p>
 <p><img src="/images/%E5%AE%89%E5%85%A8%E9%83%A8%E7%BD%B2.png"></p>
-<h2 id="四、访问控制策略及设备配置优化"><a href="#四、访问控制策略及设备配置优化" class="headerlink" title="四、访问控制策略及设备配置优化"></a>四、访问控制策略及设备配置优化</h2>
+<p><strong><center>边界防护<center/></strong></p>
+<p>访问控制、入侵、恶意代码防护：</p>
+<p>&emsp;&emsp;部署网络性能优化设备、边界访问控制设备、网络防病毒、网络入侵防御、主机防护产品、主机防病毒、安全管理中心、态势感知等各类安全产品，满足安全需求</p>
+<p><strong><center>安全审计<center/></strong></p>
+<ul>
+<li>网络审计系统（网络层）</li>
+<li>日志审计系统（应用层）</li>
+<li>数据库审计系统（应用层）</li>
+<li>运维审计系统（堡垒机、用户层）</li>
+<li>流量分析溯源（全流量）</li>
+</ul>
+<br/>
+
+<p><strong><center>集中管控（安全管理中心）<center/></strong></p>
+<p>部署：<br/></p>
+<p>安全管理中心soc（安全事件集中管理分析、处理）</p>
+<p>网络监控系统（全网设备状态集中监控）<br>安全设备集中管控系统（集中访问控制安全策略管理）</p>
+<p>终端管理系统（集中安全管理、补丁升级）</p>
+<br/>
+
+<h2 id="四、访问控制策略及设备配置优化"><a href="#四、访问控制策略及设备配置优化" class="headerlink" title="四、访问控制策略及设备配置优化"></a>四、访问控制策略及设备配置优化</h2><ul>
+<li><p>常见入侵路径</p>
+<p>–&gt; 外网 – DMZ区服务器 – 靶标系统</p>
+<p>–&gt; 外网 – 联网办公终端 – 域控 – 运维管理终端 – 堡垒机 – 靶标系统</p>
+<p>–&gt; 外网 – DMZ区云服务器 – 虚拟机逃逸 – 云管理平台 – 靶标系统</p>
+<p>–&gt; VPN – 域认证信息 – 邮箱系统 – 翻取网络拓补/账号密码 – 靶标系统</p>
+<p>–&gt; 外网 – 第三方内网 – 第三方专网 – 靶标系统</p>
+<p>–&gt; 联网设备 – 靶标系统</p>
+</li>
+<li><p>入侵路径分析</p>
+<ol>
+<li><p>从互联网服务入侵</p>
+<p>利用web漏洞入侵DMZ区服务器，再通过内网扩展拿下内部系统和终端。</p>
+<p><img src="/images/%E5%85%A5%E4%BE%B5%E8%B7%AF%E5%BE%84%E4%B8%80.png"></p>
+</li>
+<li><p>从办公区终端入侵</p>
+<p>利用邮件钓鱼等APT手段侧面入侵办公终端，从内部打入，绕过大部分用户的边界策略。</p>
+<p><img src="/images/%E5%85%A5%E4%BE%B5%E8%B7%AF%E5%BE%84%E4%BA%8C.png"></p>
+</li>
+</ol>
+</li>
+<li><p>访问控制策略配置原则和建议</p>
+<ol>
+<li>屏蔽高位端口，135、139、445等。</li>
+<li>访问控制策略最小化，尽量实现控制粒度达到单个IP的单个端口级，如允许单 ip192.168.1.1访问单ip10.10.10.10的80端口。</li>
+<li>临时策略要配置有效期，及时清理无效、过期策略。</li>
+<li>防火墙策略最后一条要默认全部禁止，策略采用白名单方式。</li>
+<li>每一条防火墙策略都要启用日志选项，以便于策略分析、日志分析、溯源。</li>
+<li>防火墙自带的网络攻击防御功能要尽可能开启，如端口扫描、dos、ip欺骗、蠕虫等。</li>
+<li>所有运维操作仅允许通过堡垒机操作，屏蔽其他直连方式</li>
+</ol>
+</li>
+<li><p>安全设备自身加固建议</p>
+<ol>
+<li>各种流量检测类设备应采集所有区域、方向的流量，确保全网络流量进行安全检测。</li>
+<li>开启密码复杂度策略，长度大于8位，包含特殊符号、数字、字母等。</li>
+<li>开启登录失败锁定功能，防止暴力破解。</li>
+<li>安全设备后台仅允许部分运维终端ip访问。</li>
+<li>安全设备snmp禁止使用弱密码(snmpv2明文传输，密码可抓，需要注意)</li>
+<li>安全设备snmp配置源ip限制，仅允许网管系统访问。</li>
+<li>安全设备配置证书双因子登录。</li>
+<li>关闭安全设备telnet、http远程管理服务，仅使用http和ssi。</li>
+<li>禁止将安全设备管理端口开放到互联网上，只允许内网管理。</li>
+</ol>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/" data-id="ckn5dml050001r8uk266o10tl" data-title="网络整体策略优化及保障设备介绍" class="article-share-link">Teilen</a>
+      <a data-url="http://example.com/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/" data-id="cko1enl390006a8ukfeuy6h94" data-title="网络整体策略优化及保障设备介绍" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-网络常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2021-03-30T09:46:47.000Z" itemprop="datePublished">2021-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/30/%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">网络常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="一、Ping命令"><a href="#一、Ping命令" class="headerlink" title="一、Ping命令"></a>一、Ping命令</h3><ul>
+<li><p>ping是个使用频率极高的实用程序，主要用于确定网络的连通性。</p>
+</li>
+<li><p>这对确定网络是否正确连接，以及网络连接的状况十分有用。简单的说，ping就是一个测试程序，如果ping运行正确，大体上就可以排除网络访问层、网卡、Modem的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。</p>
+</li>
+<li><p>ping能够以毫秒为单位显示发送请求到返回应答之间的时间量。如果应答时间短，表示数据报不必通过太多的路由器或网络，连接速度比较快。</p>
+</li>
+</ul>
+<ol>
+<li>命令格式<ul>
+<li>ping 主机名； ping 域名； ping IP地址。这个三个格式都是可以的。</li>
+</ul>
+</li>
+<li>ping命令的基本应用<ul>
+<li>ping 127.0.0.1，如果测试成功，表明网卡、TCP/IP协议的安装、IP地址、子网掩码的设置正常。如果测试不成功，就表示TCP/IP的安装或设置存在有问题。</li>
+<li>ping 本机IP地址，如果测试不成功，则表示本地配置或安装存在问题，应当对网络设备和通讯介质进行测试、检查并排除。</li>
+<li>ping局域网内其他IP，如果测试成功，表明本地网络中的网卡和载体运行正确。但如果收到0个回送应答，那么表示子网掩码不正确或网卡配置错误或电缆系统有问题。</li>
+<li>ping 网关IP，这个命令如果应答正确，表示局域网中的网关路由器正在运行并能够做出应答。</li>
+<li>ping 远程IP，如果收到正确应答，表示成功的使用了缺省网关。对于拨号上网用户则表示能够成功的访问Internet。</li>
+</ul>
+</li>
+<li>ping命令的常用参数选项<ul>
+<li>ping IP -t：连续对IP地址执行ping命令，直到被用户以Ctrl+C中断。</li>
+<li>ping IP -l 2000：指定ping命令中的特定数据长度（此处为2000字节），而不是缺省的32字节。</li>
+<li>ping IP -n 20：执行特定次数（此处是20）的ping命令。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、Tracert命令"><a href="#二、Tracert命令" class="headerlink" title="二、Tracert命令"></a>二、Tracert命令</h3><ul>
+<li>Tracert命令用来显示数据包到达目标主机所经过的路径，并显示到达每个节点的时间。命令功能同Ping类似，但它所获得的信息要比Ping命令详细得多，它把数据包所走的全部路径、节点的IP以及花费的时间都显示出来。该命令比较适用于大型网络。</li>
+</ul>
+<ol>
+<li>命令格式：<ul>
+<li>tracert IP地址或主机名 [-d][-h maximumhops][-j host_list] [-w timeout]</li>
+</ul>
+</li>
+<li>参数含义：<ul>
+<li>-d 不解析目标主机的名字</li>
+<li>-h maximum_hops 指定搜索到目标地址的最大跳跃数；</li>
+<li>-j host_list 按照主机列表中的地址释放源路由；</li>
+<li>-w timeout 指定超时时间间隔，程序默认的时间单位是毫秒</li>
+<li>例如想要了解自己的计算机与目标主机之间详细的传输路径信息，可以在MS-DOS方式输入tracert +目标主机域名或者IP地址。</li>
+</ul>
+</li>
+</ol>
+<h3 id="三、Netstat命令"><a href="#三、Netstat命令" class="headerlink" title="三、Netstat命令"></a>三、Netstat命令</h3><ul>
+<li>它可以显示当前正在活动的网络连接的详细信息，例如显示网络连接、路由表和网络接口信息，可以统计目前总共有哪些网络连接正在运行。</li>
+<li>利用命令参数，命令可以显示所有协议的使用状态，这些协议包括TCP协议、UDP协议以及IP协议等。</li>
+<li>可以选择特定的协议并查看其具体信息，还能显示所有主机的端口号以及当前主机的详细路由信息。</li>
+</ul>
+<ol>
+<li>命令格式：<ul>
+<li>netstat [-r] [-s] [-n] [-a]</li>
+</ul>
+</li>
+<li>参数含义：<ul>
+<li>-r 显示本机路由表的内容；</li>
+<li>-s 显示每个协议的使用状态(包括TCP协议、UDP协议、IP协议)；</li>
+<li>-n 以数字表格形式显示地址和端口；</li>
+<li>-a 显示所有主机的端口号。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/30/%E7%BD%91%E7%BB%9C%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cko1enl390007a8ukdmbr351a" data-title="网络常用命令" class="article-share-link">Teilen</a>
       
       
       
@@ -199,7 +827,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/30/%E7%AB%AF%E5%8F%A3%E6%BC%8F%E6%B4%9E/" data-id="ckn5dml080002r8ukfxs609zo" data-title="端口漏洞" class="article-share-link">Teilen</a>
+      <a data-url="http://example.com/2021/03/30/%E7%AB%AF%E5%8F%A3%E6%BC%8F%E6%B4%9E/" data-id="cko1enl380005a8uk4e00g267" data-title="端口漏洞" class="article-share-link">Teilen</a>
       
       
       
@@ -225,7 +853,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/03/30/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2021/03/30/hello-world/">test</a>
     </h1>
   
 
@@ -250,7 +878,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/03/30/hello-world/" data-id="ckn5dml010000r8ukfs5s2pme" data-title="Hello World" class="article-share-link">Teilen</a>
+      <a data-url="http://example.com/2021/03/30/hello-world/" data-id="cko1enl370003a8ukbvsjgeba" data-title="test" class="article-share-link">Teilen</a>
       
       
       
@@ -280,7 +908,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
     </div>
   </div>
 
@@ -293,15 +921,23 @@
       <ul>
         
           <li>
+            <a href="/2021/04/09/JavaWeb/">JavaWeb</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/">HVV蓝方四个阶段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/Spring5/">Spring5</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/SpringBoot/">SpringBoot</a>
+          </li>
+        
+          <li>
             <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/">网络整体策略优化及保障设备介绍</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/30/%E7%AB%AF%E5%8F%A3%E6%BC%8F%E6%B4%9E/">端口漏洞</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/30/hello-world/">Hello World</a>
           </li>
         
       </ul>

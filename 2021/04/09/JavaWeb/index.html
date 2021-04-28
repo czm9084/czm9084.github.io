@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JavaWeb | czm9084</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.servlet1.1.定义　　Servlet是Server与Applet的缩写，是服务端小程序的意思。使用Java语言编写的服务器端程序，可以像生成动态的WEB页,Servlet主要运行在服务器端，并由服务器调用执行，是一种按照Servlet标准来开发的类。是SUN公司提供的一门用于开发动态Web资源的技术。(言外之意:要实现web开发，需要实现Servlet标准)　　Servlet本质上也是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb">
+<meta property="og:url" content="http://example.com/2021/04/09/JavaWeb/index.html">
+<meta property="og:site_name" content="czm9084">
+<meta property="og:description" content="1.servlet1.1.定义　　Servlet是Server与Applet的缩写，是服务端小程序的意思。使用Java语言编写的服务器端程序，可以像生成动态的WEB页,Servlet主要运行在服务器端，并由服务器调用执行，是一种按照Servlet标准来开发的类。是SUN公司提供的一门用于开发动态Web资源的技术。(言外之意:要实现web开发，需要实现Servlet标准)　　Servlet本质上也是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20210409175336119.png">
+<meta property="article:published_time" content="2021-04-09T09:33:04.000Z">
+<meta property="article:modified_time" content="2021-04-28T11:56:19.429Z">
+<meta property="article:author" content="czm9084">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/image-20210409175336119.png">
+  
+    <link rel="alternate" href="/atom.xml" title="czm9084" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">czm9084</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-JavaWeb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/09/JavaWeb/" class="article-date">
+  <time class="dt-published" datetime="2021-04-09T09:33:04.000Z" itemprop="datePublished">2021-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      JavaWeb
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-servlet"><a href="#1-servlet" class="headerlink" title="1.servlet"></a>1.servlet</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1.定义"></a>1.1.定义</h3><p>　　Servlet是Server与Applet的缩写，是服务端小程序的意思。使用Java语言编写的服务器端程序，可以像生成动态的WEB页,Servlet主要运行在服务器端，并由服务器调用执行，是一种按照Servlet标准来开发的类。是SUN公司提供的一门用于开发动态Web资源的技术。(言外之意:要实现web开发，需要实现Servlet标准)<br>　　Servlet本质上也是Java类，但要遵循Servlet规范进行编写，没有 main()方法，它的创建、使用、销毁都由Servlet容器进行管理(如Tomcat)。(言外之意:写自己的类，不用写main方法，别人自动调用)<br>　　Servlet是和HTTP协议是紧密联系的，其可以处理HTTP协议相关的所有内容。这也是Servlet应用广泛的原因之一。<br>　　提供了Servlet功能的服务器，叫做Servlet容器，其常见容器有很多，如Tomcat, Jetty, WebLogic Server,WebSphere,JBoss 等等。</p>
+<h3 id="1-2-实现"><a href="#1-2-实现" class="headerlink" title="1.2.实现"></a>1.2.实现</h3><ol>
+<li>实现Servlet规范，继承HttpServlet类</li>
+<li>重写service方法，用来处理请求</li>
+<li>添加@WebServlet注解，指定访问的路径</li>
+</ol>
+<h3 id="1-3-原理"><a href="#1-3-原理" class="headerlink" title="1.3.原理"></a>1.3.原理</h3><ol>
+<li><p>根据web请求头中的host找到服务器</p>
+</li>
+<li><p>根据请求行（post、get）获取访问的资源路径，找到对应的servlet类</p>
+</li>
+<li><p>类加载与其初始化：</p>
+<p>　　servlet容器将servlet加载到内存，（第一次访问）容器创建servlet实例（非首次直接调用），通过init方法进行初始化</p>
+</li>
+<li><p>服务阶段：</p>
+<p>　　调用Service()方法，Service()方法根据请求方法调用对应的处理方法doPost()或doGet()，还有一些其他的请求方法doPut() doOptions()…但这些方法不常用，并且从安全的角度都是建议屏蔽的。</p>
+</li>
+<li><p>销毁：</p>
+<p>　　处理完请求调用Destroy()方法销毁servlet</p>
+</li>
+<li><p>每一个不同的请求对应一个不同的servlet</p>
+</li>
+</ol>
+<h3 id="1-4-生命周期"><a href="#1-4-生命周期" class="headerlink" title="1.4.生命周期"></a>1.4.生命周期</h3><ol>
+<li>Web客户端向Servlet容器(Tomcat)发出Http请求</li>
+<li>Servlet容器接收Web客户端的请求</li>
+<li>Servlet容器创建一个HttpServletRequest对象，将Web客户端请求的信息封装到这个对象中</li>
+<li>Servlet容器创建一个HttpServletResponse对象</li>
+<li>Servlet容器调HttpServlet对象service方法，把Request与Response作为参数，传给HttpServlet</li>
+<li>HttpServlet调用HttpServletRequest对象的有关方法，获取Http请求信息</li>
+<li>HttpServlet 调用HttpServletResponse对象的有关方法，生成响应数据</li>
+<li>Servlet容器把HttpServlet的响应结果传给Web客户端</li>
+</ol>
+<h2 id="2-HttpServletRequest对象"><a href="#2-HttpServletRequest对象" class="headerlink" title="2.HttpServletRequest对象"></a>2.HttpServletRequest对象</h2><h3 id="2-1-接受请求"><a href="#2-1-接受请求" class="headerlink" title="2.1.接受请求"></a>2.1.接受请求</h3><h4 id="2-1-1-常用方法"><a href="#2-1-1-常用方法" class="headerlink" title="2.1.1.常用方法"></a>2.1.1.常用方法</h4><ol>
+<li>获取请求的完整路径：req.getRequestURL()</li>
+<li>获取资源定位符：req.getRequestURI()</li>
+<li>获取请求参数：req.getQueryString()</li>
+<li>获取请求方法：req.getMethod()</li>
+<li>获取当前协议版本信息：req.getProtocol()</li>
+<li>获取项目站点：req.getContextPath()</li>
+</ol>
+<h4 id="2-1-2-获取请求参数"><a href="#2-1-2-获取请求参数" class="headerlink" title="2.1.2.获取请求参数"></a>2.1.2.获取请求参数</h4><ol>
+<li>指定名称获取参数：req.getParameter()</li>
+<li>指定名称获取多个参数（用于复选框）：req.getParameterValues()</li>
+</ol>
+<h3 id="2-2-请求乱码问题"><a href="#2-2-请求乱码问题" class="headerlink" title="2.2.请求乱码问题"></a>2.2.请求乱码问题</h3><ol>
+<li><p>tomcat：</p>
+<ul>
+<li><p>1、tomcat8（及以上）：Get()方法不会乱码；Post()方法会乱码</p>
+</li>
+<li><p>2、tomcat7（及以下）：Get()方法会乱码；Post()方法会乱码</p>
+</li>
+</ul>
+</li>
+<li><p>原因：Post方法在解析过程中默认编码方式为 ISO-8859-1(此编码不支持中文)，所以一定会乱码</p>
+</li>
+<li><p>解决方法：req.setCharacterEncoding(“UTF-8”);</p>
+</li>
+<li><p>注意：</p>
+<ul>
+<li><p>1、req.setCharacterEncoding(“UTF-8”)只针对post请求</p>
+</li>
+<li><p>2、new String(req.getParameter(“name”).getBytes(“ISO-8859-1”), “UTF-8”)针对任何情况。不乱码使用会乱码</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-3-请求转发"><a href="#2-3-请求转发" class="headerlink" title="2.3.请求转发"></a>2.3.请求转发</h3><ol>
+<li>定义：在Web应用内部，一个servlet只能请求转发到一个资源。</li>
+<li>特点：<ul>
+<li>1.服务器端行为</li>
+<li>2.地址栏不发生改变</li>
+<li>3.从始至终只有一个请求</li>
+<li>4.request数据可以共享</li>
+</ul>
+</li>
+<li>实现：<ul>
+<li>req.getRequestDispatcher(“ /servlet or xxx.jsp/html “).forward(req, resp);</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-4-Request作用域"><a href="#2-4-Request作用域" class="headerlink" title="2.4.Request作用域"></a>2.4.Request作用域</h3><ol>
+<li>定义：通过该对象可以在一个请求中共享数据（能在请求转发中传输/共享数据）</li>
+<li>作用范围：只在一次请求中有效（只能在请求转发中有效）</li>
+<li>实现：<ul>
+<li>1.设置域对象内容：req.setAttribute(key, value);</li>
+<li>2.设置请求转发（转发到index.jsp为例）：req.getRequestDispatcher(“index.jsp”).forward(req, resp);</li>
+<li>3.根据key获取value（在index.jsp页面）：req.getAttribute(key);</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-HttpServletResponse对象"><a href="#3-HttpServletResponse对象" class="headerlink" title="3.HttpServletResponse对象"></a>3.HttpServletResponse对象</h2><h3 id="3-1-响应数据"><a href="#3-1-响应数据" class="headerlink" title="3.1.响应数据"></a>3.1.响应数据</h3><ol>
+<li>常用方法：<ul>
+<li>1.getWriter()：字符输出流，只输出字符串</li>
+<li>2.getOutputStream()：字节输出流，输出任意类型数据</li>
+</ul>
+</li>
+<li>注意：只有一个response对象，两者不能同时使用，否则报错：java.lang.IllegalStateException</li>
+<li>实现：<ul>
+<li>1.获取字节/字符输出流：getWriter()/getOutputStream()</li>
+<li>2.输出数据：getWriter().write()/getOutputStream().write()</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-2-响应乱码问题"><a href="#3-2-响应乱码问题" class="headerlink" title="3.2.响应乱码问题"></a>3.2.响应乱码问题</h3><ul>
+<li>字节输出流/字符输出流：<ul>
+<li>1.分别设置服务端、客户端编码<ul>
+<li>1.服务端：resp.setCharacterEncoding(“UTF-8”);</li>
+<li>2.客户端：resp.setHeader(“content-type”, “text/html;charset=UTF-8”);</li>
+</ul>
+</li>
+<li>2.统一设置服务端客户端编码：resp.setContentType(“text/html;charset=UTF-8”);</li>
+<li>3.输出数据：resp.getWriter().write();</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/image-20210409175336119.png" alt="image-20210409175336119"></p>
+<ul>
+<li>当服务器接收到浏览器的请求后，会解析请求URL路径，获取访问的serverlet的资源路径</li>
+<li>查找web.xml文件，是否有对应的<code>&lt;url-pattern&gt;</code>标签体内容</li>
+<li>如果有，则再找到对应的<code>&lt;serverlet-class&gt;</code>全类名</li>
+<li>tomcat将该类的字节码文件加载进内存，并创建其对象</li>
+<li>调用其方法</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/09/JavaWeb/" data-id="cko1enl330001a8ukfgb72wzc" data-title="JavaWeb" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">HVV蓝方四个阶段</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/09/JavaWeb/">JavaWeb</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/HVV%E8%93%9D%E6%96%B9%E5%9B%9B%E4%B8%AA%E9%98%B6%E6%AE%B5/">HVV蓝方四个阶段</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/Spring5/">Spring5</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/06/SpringBoot/">SpringBoot</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/30/%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%AD%96%E7%95%A5%E4%BC%98%E5%8C%96%E5%8F%8A%E4%BF%9D%E9%9A%9C%E8%AE%BE%E5%A4%87%E4%BB%8B%E7%BB%8D/">网络整体策略优化及保障设备介绍</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 czm9084<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
